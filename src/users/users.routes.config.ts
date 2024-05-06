@@ -7,7 +7,6 @@ import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../common/middleware/common.permission.middleware';
 import { PermissionFlag } from '../common/middleware/common.permissionflag.enum';
-import usersMiddleware from './middleware/users.middleware';
 
 export class UsersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -54,7 +53,7 @@ export class UsersRoutes extends CommonRoutesConfig {
       body('permissionFlags').isInt(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validateUserEmailMatchesUserId,
-      usersMiddleware.userCantChangePermission,
+      UsersMiddleware.userCantChangePermission,
       UsersController.put,
     ]);
 
@@ -69,7 +68,7 @@ export class UsersRoutes extends CommonRoutesConfig {
       body('permissionFlags').isInt().optional(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
-      usersMiddleware.userCantChangePermission,
+      UsersMiddleware.userCantChangePermission,
       permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       UsersController.patch,
     ]);
