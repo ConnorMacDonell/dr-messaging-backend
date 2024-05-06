@@ -23,6 +23,11 @@ class MountainsMiddleware {
       res.status(404).send({ error: `Mountain ${req.params.mountainId} not found` });
     }
   }
+
+  async extractMountainId(req: express.Request, res: express.Response, next: express.NextFunction) {
+    req.body.id = req.params.userId;
+    next();
+  }
 }
 
 export default new MountainsMiddleware();
