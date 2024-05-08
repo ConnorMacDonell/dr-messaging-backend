@@ -1,5 +1,5 @@
 import usersDao from "../dao/users.dao";
-import { CRUD } from "../../common/interfaces/crud.interface";
+import { CRUD } from "../../shared/interfaces/crud.interface";
 import { CreateUserDto } from "../dtos/create.user.dto";
 import { PutUserDto } from "../dtos/put.user.dto";
 import { PatchUserDto } from "../dtos/patch.user.dto";

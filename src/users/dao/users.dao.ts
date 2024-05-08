@@ -1,10 +1,10 @@
 import { CreateUserDto } from '../dtos/create.user.dto';
 import { PatchUserDto } from '../dtos/patch.user.dto';
 import { PutUserDto } from '../dtos/put.user.dto';
-import mongooseService from '../../common/services/mongoose.service';
+import mongooseService from '../../shared/services/mongoose.service';
 import shortid from 'shortid';
 import debug from 'debug';
-import { PermissionFlag } from '../../common/middleware/common.permissionflag.enum';
+import { PermissionFlag } from '../../shared/middleware/shared.permissionflag.enum';
 
 const log: debug.IDebugger = debug('app:in-memory-dao');
 

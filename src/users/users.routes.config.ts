@@ -1,14 +1,16 @@
 import express from 'express';
-import { CommonRoutesConfig } from "../common/common.routes.config";
+import { SharedRoutesConfig } from "../shared/shared.routes.config";
 import UsersController from "./controllers/users.controller";
 import UsersMiddleware from "./middleware/users.middleware";
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
+import BodyValidationMiddleware from '../shared/middleware/body.validation.middleware';
 import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
-import permissionMiddleware from '../common/middleware/common.permission.middleware';
-import { PermissionFlag } from '../common/middleware/common.permissionflag.enum';
+import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
+import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
+import Logger from '../lib/logger';
 
-export class UsersRoutes extends CommonRoutesConfig {
+
+export class UsersRoutes extends SharedRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'UserRoutes');
   }
