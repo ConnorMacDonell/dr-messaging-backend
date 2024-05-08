@@ -1,11 +1,13 @@
 import express from 'express';
 import { validationResult } from 'express-validator';
+import Logger from '../../lib/logger';
 
 class BodyValidationMiddleware {
   verifyBodyFieldsErrors(req: express.Request, res: express.Response, next: express.NextFunction) {
+    Logger.info(req.body);
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
-      return res.status(400).send('Some kind of validation error');//{ errors: errors.array() });
+      return res.status(400).send({ errors: errors.array() });
     }
     next();
   }
