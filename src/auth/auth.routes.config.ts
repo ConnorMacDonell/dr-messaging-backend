@@ -1,12 +1,12 @@
-import { CommonRoutesConfig } from "../common/common.routes.config";
-import bodyValidationMiddleware from "../common/middleware/body.validation.middleware";
+import { SharedRoutesConfig } from "../shared/shared.routes.config";
+import bodyValidationMiddleware from "../shared/middleware/body.validation.middleware";
 import authController from "./controllers/auth.controller";
 import authMiddleware from "./middleware/auth.middleware";
 import jwtMiddleware from "./middleware/jwt.middleware";
 import express from 'express';
 import { body } from "express-validator";
 
-export class AuthRoutes extends CommonRoutesConfig {
+export class AuthRoutes extends SharedRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'AuthRoutes');
   }
