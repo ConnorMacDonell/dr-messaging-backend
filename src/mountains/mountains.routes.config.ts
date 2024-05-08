@@ -1,14 +1,14 @@
 import express from 'express';
-import { CommonRoutesConfig } from "../common/common.routes.config";
+import { SharedRoutesConfig } from "../shared/shared.routes.config";
 import MountainsController from './controllers/mountains.controller';
 import MountainsMiddleware from './middleware/mountains.middleware';
-import BodyValidationMiddleware from '../common/middleware/body.validation.middleware';
+import BodyValidationMiddleware from '../shared/middleware/body.validation.middleware';
 import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
-import permissionMiddleware from '../common/middleware/common.permission.middleware';
-import { PermissionFlag } from '../common/middleware/common.permissionflag.enum';
+import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
+import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
 
-export class MountainRoutesConfig extends CommonRoutesConfig {
+export class MountainRoutesConfig extends SharedRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'MountainRoutes');
   }

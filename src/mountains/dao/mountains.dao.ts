@@ -4,7 +4,7 @@ import { PutMountainDto } from "../dtos/put.mountain.dto";
 import { PatchMountainDto } from "../dtos/patch.mountain.dto";
 import debug from "debug";
 import shortid from "shortid";
-import mongooseService from '../../common/services/mongoose.service';
+import mongooseService from '../../shared/services/mongoose.service';
 
 
 

@@ -1,5 +1,5 @@
 import mountainsDao from "../dao/mountains.dao";
-import { CRUD } from "../../common/interfaces/crud.interface";
+import { CRUD } from "../../shared/interfaces/crud.interface";
 import { CreateMountainDto } from "../dtos/create.mountain.dto";
 import { PatchMountainDto } from "../dtos/patch.mountain.dto";
 import { PutMountainDto } from "../dtos/put.mountain.dto";
