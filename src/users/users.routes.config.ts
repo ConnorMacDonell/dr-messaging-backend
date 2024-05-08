@@ -7,7 +7,6 @@ import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
 import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
-import Logger from '../lib/logger';
 
 
 export class UsersRoutes extends SharedRoutesConfig {
@@ -29,7 +28,7 @@ export class UsersRoutes extends SharedRoutesConfig {
           .withMessage('Must include password (5+ characters'),
         body('firstName').isString(),
         body('lastName').isString(),
-        body('permissionFlags').isInt(),
+        body('permissionFlags').isInt().optional(),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         UsersMiddleware.validateEmailUniqueness,
         UsersController.createUser
