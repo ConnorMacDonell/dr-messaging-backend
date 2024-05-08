@@ -33,7 +33,7 @@ class UsersController {
         return __awaiter(this, void 0, void 0, function* () {
             req.body.password = yield argon2_1.default.hash(req.body.password);
             const userId = yield users_service_1.default.create(req.body);
-            res.status(200).send({ id: userId });
+            res.status(201).send({ id: userId });
         });
     }
     patch(req, res) {
