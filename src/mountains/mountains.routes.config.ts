@@ -1,21 +1,21 @@
 import express from 'express';
 import { SharedRoutesConfig } from "../shared/shared.routes.config";
-import MessagesController from './controllers/messages.controller';
-import MessagesMiddleware from './middleware/messages.middleware';
+import MountainsController from './controllers/mountains.controller';
+import MountainsMiddleware from './middleware/mountains.middleware';
 import BodyValidationMiddleware from '../shared/middleware/body.validation.middleware';
 import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
 import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
 
-export class MessageRoutesConfig extends SharedRoutesConfig {
+export class MountainRoutesConfig extends SharedRoutesConfig {
   constructor(app: express.Application) {
-    super(app, 'MessageRoutes');
+    super(app, 'MountainRoutes');
   }
 
   configureRoutes() {
-    this.app.route('/messages')
-      .get(MessagesController.listMessages)
+    this.app.route('/mountains')
+      .get(MountainsController.listMountains)
       .post(
         body('name').isString(),
         body('description').isString(),
@@ -26,18 +26,18 @@ export class MessageRoutesConfig extends SharedRoutesConfig {
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
         permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
-        MessagesController.createMessage
+        MountainsController.createMountain
       );
 
-    this.app.param(`messageId`, MessagesMiddleware.extractMessageId);
-    this.app.route('/messages/:messageId')
-      .all(MessagesMiddleware.validateMessageExistence)
-      .get(MessagesController.getMessageById)
+    this.app.param(`mountainId`, MountainsMiddleware.extractMountainId);
+    this.app.route('/mountains/:mountainId')
+      .all(MountainsMiddleware.validateMountainExistence)
+      .get(MountainsController.getMountainById)
       .delete(
         permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
-        MessagesController.removeMessage);
+        MountainsController.removeMountain);
 
-    this.app.put('/messages/:messageId', [
+    this.app.put('/mountains/:mountainId', [
       body('name').isString(),
       body('description').isString(),
       body('lat').isInt(),
@@ -47,10 +47,10 @@ export class MessageRoutesConfig extends SharedRoutesConfig {
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       jwtMiddleware.validJWTNeeded,
       permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
-      MessagesController.put
+      MountainsController.put
     ]);
 
-    this.app.patch('/messages/:messageId', [
+    this.app.patch('/mountains/:mountainId', [
       body('name').isString().optional(),
       body('description').isString().optional(),
       body('lat').isInt().optional(),
@@ -60,7 +60,7 @@ export class MessageRoutesConfig extends SharedRoutesConfig {
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       jwtMiddleware.validJWTNeeded,
       permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
-      MessagesController.patch
+      MountainsController.patch
     ]);
 
     return this.app;
