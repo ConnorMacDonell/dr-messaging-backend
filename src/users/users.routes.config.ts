@@ -70,7 +70,7 @@ export class UsersRoutes extends SharedRoutesConfig {
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
       UsersMiddleware.userCantChangePermission,
-      permissionMiddleware.permissionFlagRequired(PermissionFlag.FREE_PERMISSION),
+      permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       UsersController.patch,
     ]);
 
