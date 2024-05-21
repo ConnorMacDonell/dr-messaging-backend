@@ -12,7 +12,7 @@ class SharedPermissionMiddleware {
         if(userPermissionFlags & requiredPermissionFlag){
           next();
         } else {
-          res.status(403).send();
+          res.status(403).send('Permission level too low.');
         }
       } catch(err) {
         log(err);
@@ -28,7 +28,7 @@ class SharedPermissionMiddleware {
       if(userPermissionFlags & PermissionFlag.ADMIN_PERMISSION){
         return next();
       } else {
-        return res.status(403).send();
+        return res.status(403).send('Only same user or admin can perform this action');
       }
     }
   }
