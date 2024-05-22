@@ -20,6 +20,7 @@ class MessageDao {
     _id: String,
     body: String,
     owner_id: String,
+    category: String,
   }, {id: false});
   
   Message = mongooseService.getMongoose().model('Messages', this.messageSchema);
