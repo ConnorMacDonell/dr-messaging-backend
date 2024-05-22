@@ -15,11 +15,11 @@ export class MessageRoutes extends SharedRoutesConfig {
 
   configureRoutes() {
     this.app.route('/messages')
-      .get(MessagesController.listMessages)
+      .get(MessagesController.listMessagesByOwnerId)
       .post(
         body('category').isString(),
-        body('message_body').isString(),
-        body('owner_id').isString(),
+        body('messageBody').isString(),
+        body('ownerId').isString(),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
         permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),

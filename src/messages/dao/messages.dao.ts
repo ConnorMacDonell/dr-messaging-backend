@@ -18,8 +18,8 @@ class MessageDao {
 
   messageSchema = new this.Schema({
     _id: String,
-    message_body: String,
-    owner_id: String,
+    messageBody: String,
+    ownerId: String,
     category: String,
   }, {id: false});
   
@@ -44,6 +44,10 @@ class MessageDao {
       .limit(limit)
       .skip(limit*pageNumber)
       .exec();
+  }
+
+  async getMessagesByOwner(messageId: string) {
+    return this.Message.findOne({ _id: messageId }).exec();
   }
 
   async getMessageById(messageId: string) {

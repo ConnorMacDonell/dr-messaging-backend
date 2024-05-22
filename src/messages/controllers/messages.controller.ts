@@ -11,6 +11,11 @@ class MessagesController {
     res.status(200).send(messages);
   }
 
+  async listMessagesByOwnerId(req: express.Request, res: express.Response) {
+    const messages = await messageService.listByOwnerId(10, req.body.page - 1, req.body.ownerId);
+    res.status(200).send(messages);
+  }
+
   async getMessageById(req: express.Request, res: express.Response) {
     const message = await messageService.readById(req.body.id);
     res.status(200).send(message);
