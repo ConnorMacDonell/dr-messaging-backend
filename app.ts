@@ -14,6 +14,7 @@ import cors from 'cors';
 import { SharedRoutesConfig } from './src/shared/shared.routes.config';
 import { UsersRoutes } from './src/users/users.routes.config';
 import { AuthRoutes } from './src/auth/auth.routes.config';
+import { MessageRoutes } from './src/messages/messages.routes.config'
 import debug from 'debug';
 
 const app: express.Application = express();
@@ -38,6 +39,7 @@ app.use(morganMiddleware);
 // after sending the Express.js application object to have the routes added to the app
 routes.push(new UsersRoutes(app));
 routes.push(new AuthRoutes(app));
+routes.push(new MessageRoutes(app));
 
 // route to make sure everything is working properly
 const runningMessage = `Server running at http://localhost:${port}.`;
