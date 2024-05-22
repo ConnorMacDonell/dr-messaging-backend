@@ -8,11 +8,11 @@ class SharedPermissionMiddleware {
   permissionFlagRequired(requiredPermissionFlag: PermissionFlag){
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       try {
-        const userPermissionFlags = parseInt(res.locals.jwt.permisionFlags);
+        const userPermissionFlags = res.locals.jwt.permissionFlags;
         if(userPermissionFlags & requiredPermissionFlag){
           next();
         } else {
-          res.status(403).send("Permission too low");
+          res.status(403).send(`Permission too low ${userPermissionFlags}`);
         }
       } catch(err) {
         log(err);
