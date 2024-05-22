@@ -8,7 +8,7 @@ import jwtMiddleware from '../auth/middleware/jwt.middleware';
 import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
 import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
 
-export class MessageRoutesConfig extends SharedRoutesConfig {
+export class MessageRoutes extends SharedRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'MessageRoutes');
   }
@@ -17,15 +17,11 @@ export class MessageRoutesConfig extends SharedRoutesConfig {
     this.app.route('/messages')
       .get(MessagesController.listMessages)
       .post(
-        body('name').isString(),
-        body('description').isString(),
-        body('lat').isInt(),
-        body('long').isInt(),
-        body('rating').isInt(),
-        body('photos').isArray(),
+        body('category').isString(),
+        body('body').isString(),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
-        permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
+        permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
         MessagesController.createMessage
       );
 
@@ -34,32 +30,24 @@ export class MessageRoutesConfig extends SharedRoutesConfig {
       .all(MessagesMiddleware.validateMessageExistence)
       .get(MessagesController.getMessageById)
       .delete(
-        permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
+        permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
         MessagesController.removeMessage);
 
     this.app.put('/messages/:messageId', [
-      body('name').isString(),
-      body('description').isString(),
-      body('lat').isInt(),
-      body('long').isInt(),
-      body('rating').isInt(),
-      body('photos').isArray(),
+      body('category').isString(),
+      body('body').isString(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       jwtMiddleware.validJWTNeeded,
-      permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
+      permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       MessagesController.put
     ]);
 
     this.app.patch('/messages/:messageId', [
-      body('name').isString().optional(),
-      body('description').isString().optional(),
-      body('lat').isInt().optional(),
-      body('long').isInt().optional(),
-      body('rating').isInt().optional(),
-      body('photos').isArray().optional(),
+      body('category').isString().optional(),
+      body('body').isString().optional(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       jwtMiddleware.validJWTNeeded,
-      permissionMiddleware.permissionFlagRequired(PermissionFlag.ADMIN_PERMISSION),
+      permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       MessagesController.patch
     ]);
 
