@@ -16,8 +16,8 @@ class MessagesController {
     res.status(200).send(message);
   }
 
-  async getMessageByName(req: express.Request, res: express.Response) {
-    const message = await messageService.readMessageByName(req.body.name);
+  async getMessageByCategory(req: express.Request, res: express.Response) {
+    const message = await messageService.readMessageByCategory(req.body.category);
     res.status(200).send(message);
   }
 

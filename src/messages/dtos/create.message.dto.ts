@@ -1,5 +1,5 @@
 export interface CreateMessageDto {
   category: string;
-  body: string;
+  message_body: string;
   owner_id: string;
 }

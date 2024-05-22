@@ -1,6 +1,6 @@
 
 export interface PutMessageDto {
   category: string;
-  body: string;
+  message_body: string;
   owner_id: string;
 }

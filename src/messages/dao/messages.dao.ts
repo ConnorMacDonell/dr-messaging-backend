@@ -18,7 +18,7 @@ class MessageDao {
 
   messageSchema = new this.Schema({
     _id: String,
-    body: String,
+    message_body: String,
     owner_id: String,
     category: String,
   }, {id: false});
@@ -50,8 +50,8 @@ class MessageDao {
     return this.Message.findOne({ _id: messageId }).exec();
   }
 
-  async getMessageByName(messageName: string) {
-    return this.Message.findOne({ name: messageName }).exec();
+  async getMessageByCategory(messageCategory: string) {
+    return this.Message.findOne({ name: messageCategory }).exec();
   }
 
   async updateMessageById(messageId: string, messageFields: PatchMessageDto | PutMessageDto) {

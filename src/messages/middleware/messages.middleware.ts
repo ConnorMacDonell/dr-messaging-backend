@@ -5,10 +5,10 @@ import debug from "debug";
 const log: debug.IDebugger = debug("app:messages-middleware");
 
 class MessagesMiddleware {
-  async validateNameUniqueness(req: express.Request, res: express.Response, next: express.NextFunction){
-    const message = await messageService.readMessageByName(req.body.name);
+  async validateCategoryUniqueness(req: express.Request, res: express.Response, next: express.NextFunction){
+    const message = await messageService.readMessageByCategory(req.body.category);
     if (message) {
-      res.status(400).send('A message with the given name already exists.');
+      res.status(400).send('A message with the given category already exists.');
     } else {
       next();
     }
@@ -25,7 +25,7 @@ class MessagesMiddleware {
   }
 
   async extractMessageId(req: express.Request, res: express.Response, next: express.NextFunction) {
-    req.body.id = req.params.userId;
+    req.body.id = req.params.messageId;
     next();
   }
 }
