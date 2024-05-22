@@ -18,7 +18,8 @@ export class MessageRoutes extends SharedRoutesConfig {
       .get(MessagesController.listMessages)
       .post(
         body('category').isString(),
-        body('body').isString(),
+        body('message_body').isString(),
+        body('owner_id').isString(),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
         permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
