@@ -1,13 +1,11 @@
 import express from "express";
 import { PermissionFlag } from "./shared.permissionflag.enum";
 import debug from 'debug';
-import Logger from "../../lib/logger";
 
 const log: debug.IDebugger = debug('app:shared-permission-middleware');
 
 class SharedPermissionMiddleware {
   permissionFlagRequired(requiredPermissionFlag: PermissionFlag){
-    Logger.info("In the permission middleware");
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       try {
         const userPermissionFlags = res.locals.jwt.permissionFlags;
