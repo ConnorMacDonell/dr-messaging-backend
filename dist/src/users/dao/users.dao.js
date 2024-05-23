@@ -35,7 +35,7 @@ class UsersDao {
     addUser(userFields) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = shortid_1.default.generate();
-            const user = new this.User(Object.assign(Object.assign({ _id: userId }, userFields), { permissionFlags: shared_permissionflag_enum_1.PermissionFlag.FREE_PERMISSION }));
+            const user = new this.User(Object.assign(Object.assign({ _id: userId }, userFields), { permissionFlags: shared_permissionflag_enum_1.PermissionFlag.PAID_PERMISSION }));
             yield user.save();
             return userId;
         });
