@@ -5,6 +5,7 @@ import { PatchMessageDto } from "../dtos/patch.message.dto";
 import debug from "debug";
 import shortid from "shortid";
 import mongooseService from '../../shared/services/mongoose.service';
+import Logger from "../../lib/logger";
 
 
 
@@ -46,8 +47,8 @@ class MessageDao {
       .exec();
   }
 
-  async getMessagesByOwner(messageId: string) {
-    return this.Message.findOne({ _id: messageId }).exec();
+  async getMessagesByOwner(ownerId: string) {
+    return this.Message.find({ ownerId: ownerId }).exec();
   }
 
   async getMessageById(messageId: string) {

@@ -9,8 +9,8 @@ class MessageService implements CRUD {
     return messagesDao.getMessages(limit, page);
   }
 
-  async listByOwnerId(limit: number, page: number, onwerId: string) {
-    return messagesDao.getMessages(limit, page);
+  async listByOwnerId(ownerId: string) {
+    return messagesDao.getMessagesByOwner(ownerId);
   }
 
   async create(resource: CreateMessageDto) {

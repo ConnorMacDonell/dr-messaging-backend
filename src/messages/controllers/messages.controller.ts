@@ -2,6 +2,7 @@ import express from "express";
 import messageService from "../services/messages.service";
 import argon2 from "argon2";
 import debug from "debug";
+import Logger from "../../lib/logger";
 
 const log: debug.IDebugger = debug('app:messages-controller');
 
@@ -12,7 +13,9 @@ class MessagesController {
   }
 
   async listMessagesByOwnerId(req: express.Request, res: express.Response) {
-    const messages = await messageService.listByOwnerId(10, req.body.page - 1, req.body.ownerId);
+    const messages = await messageService.listByOwnerId(res.locals.jwt.userId);
+    Logger.info('At the end of the controller');
+    Logger.info(messages);
     res.status(200).send(messages);
   }
 
