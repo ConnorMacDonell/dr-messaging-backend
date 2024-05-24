@@ -21,7 +21,7 @@ class SharedPermissionMiddleware {
   }
 
   async onlySameUserOrAdminCanDoThisAction(req: express.Request, res: express.Response, next: express.NextFunction){
-    const userPermissionFlags = parseInt(res.locals.jwt.permissionFlags);
+    const userPermissionFlags = res.locals.jwt.permissionFlags;
     if(req.params && req.params.userId && req.params.userId === res.locals.jwt.userId){
       return next();
     } else {
@@ -31,6 +31,17 @@ class SharedPermissionMiddleware {
         return res.status(403).send("Only same user or admin can do this action");
       }
     }
+  }
+
+  async onlyMessageOwnerOrAdminCanDoThisAction(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const userPermissionFlags = res.locals.jwt.permissionFlags;
+    if (res.locals.jwt.userID === res.locals.message.ownerId){
+      return next();
+    } else if (userPermissionFlags & PermissionFlag.ADMIN_PERMISSION){
+      return next();
+    } else {
+      res.status(403).send({error: 'Rquester does not own resource.'});
+    };
   }
 }
 

@@ -5,7 +5,7 @@ import MessagesMiddleware from './middleware/messages.middleware';
 import BodyValidationMiddleware from '../shared/middleware/body.validation.middleware';
 import { body } from 'express-validator';
 import jwtMiddleware from '../auth/middleware/jwt.middleware';
-import permissionMiddleware from '../shared/middleware/shared.permission.middleware';
+import PermissionMiddleware from '../shared/middleware/shared.permission.middleware';
 import { PermissionFlag } from '../shared/middleware/shared.permissionflag.enum';
 
 export class MessageRoutes extends SharedRoutesConfig {
@@ -17,7 +17,7 @@ export class MessageRoutes extends SharedRoutesConfig {
     this.app.route('/messages')
       .get(
         jwtMiddleware.validJWTNeeded,
-        permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+        PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
         MessagesController.listMessagesByOwnerId)
       .post(
         body('category').isString(),
@@ -25,24 +25,26 @@ export class MessageRoutes extends SharedRoutesConfig {
         body('ownerId').isString(),
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
-        permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+        PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
         MessagesController.createMessage
       );
 
     this.app.param(`messageId`, MessagesMiddleware.extractMessageId);
     this.app.route('/messages/:messageId')
-      .all(MessagesMiddleware.validateMessageExistence)
+      .all(MessagesMiddleware.validateMessageExistence,
+        jwtMiddleware.validJWTNeeded,
+        PermissionMiddleware.onlyMessageOwnerOrAdminCanDoThisAction,
+      )
       .get(MessagesController.getMessageById)
       .delete(
-        permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+        PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
         MessagesController.removeMessage);
 
     this.app.put('/messages/:messageId', [
       body('category').isString(),
       body('body').isString(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
-      jwtMiddleware.validJWTNeeded,
-      permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+      PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       MessagesController.put
     ]);
 
@@ -50,9 +52,14 @@ export class MessageRoutes extends SharedRoutesConfig {
       body('category').isString().optional(),
       body('body').isString().optional(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
-      jwtMiddleware.validJWTNeeded,
-      permissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+      PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
       MessagesController.patch
+    ]);
+
+    this.app.post('/messages/:messageId', [
+      body('recipients').isArray(),
+      BodyValidationMiddleware.verifyBodyFieldsErrors,
+      PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
     ]);
 
     return this.app;
