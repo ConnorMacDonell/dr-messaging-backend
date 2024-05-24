@@ -1,4 +1,7 @@
+import debug from "debug";
 import Logger from "../../lib/logger";
+
+const debugLog: debug.IDebugger = debug('app:twilio-service');
 
 class TwilioService {
 
