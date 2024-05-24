@@ -1,6 +1,7 @@
 import express from "express";
 import { PermissionFlag } from "./shared.permissionflag.enum";
 import debug from 'debug';
+import Logger from "../../lib/logger";
 
 const log: debug.IDebugger = debug('app:shared-permission-middleware');
 
@@ -35,12 +36,12 @@ class SharedPermissionMiddleware {
 
   async onlyMessageOwnerOrAdminCanDoThisAction(req: express.Request, res: express.Response, next: express.NextFunction) {
     const userPermissionFlags = res.locals.jwt.permissionFlags;
-    if (res.locals.jwt.userID === res.locals.message.ownerId){
+    if (res.locals.jwt.userId === res.locals.message.ownerId){
       return next();
     } else if (userPermissionFlags & PermissionFlag.ADMIN_PERMISSION){
       return next();
     } else {
-      res.status(403).send({error: 'Rquester does not own resource.'});
+      res.status(403).send({error: 'Requester does not own resource.'});
     };
   }
 }
