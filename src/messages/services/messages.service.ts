@@ -18,7 +18,7 @@ class MessageService implements CRUD {
   }
 
   async readById(id: string) {
-    return messagesDao.removeMessageById(id);
+    return messagesDao.getMessageById(id);
   }
 
   async readMessageByCategory(name: string) {
