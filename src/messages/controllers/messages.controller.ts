@@ -2,6 +2,7 @@ import express from "express";
 import messageService from "../services/messages.service";
 import argon2 from "argon2";
 import debug from "debug";
+import twilioService from "../services/twilio.service";
 
 const log: debug.IDebugger = debug('app:messages-controller');
 
@@ -44,6 +45,13 @@ class MessagesController {
   async removeMessage(req: express.Request, res: express.Response) {
     log(await messageService.deleteById(req.body.id));
     res.status(204).send();
+  }
+
+  async sendMessage(req: express.Request, res: express.Response) {
+    const message = await messageService.readById(req.body.id);
+    const messageBody = message?.messageBody as string;
+    const result = await twilioService.sendMessage(req.body.recipients, messageBody);
+    res.status(204).send(result);
   }
 }
 
