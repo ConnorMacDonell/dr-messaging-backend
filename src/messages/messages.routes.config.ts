@@ -57,9 +57,10 @@ export class MessageRoutes extends SharedRoutesConfig {
     ]);
 
     this.app.post('/messages/:messageId', [
-      body('recipients').isArray(),
+      body('recipients').isString(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+      MessagesController.sendMessage
     ]);
 
     return this.app;
