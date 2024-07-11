@@ -60,7 +60,7 @@ export class MessageRoutes extends SharedRoutesConfig {
       body('recipients').isString(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
-      MessagesController.sendMessage
+      MessagesController.sendTestMessage
     ]);
 
     return this.app;

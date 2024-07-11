@@ -53,6 +53,12 @@ class MessagesController {
     const result = await twilioService.sendMessage(req.body.recipients, messageBody);
     res.status(204).send(result);
   }
+
+  async sendTestMessage(req: express.Request, res: express.Response) {
+    const messageBody = "This message sent automatically, courtesy of Connor MacDonell";
+    const result = await twilioService.sendTestMessage('+14083355926', messageBody);
+    res.status(204).send(result);
+  }
 }
 
 export default new MessagesController();

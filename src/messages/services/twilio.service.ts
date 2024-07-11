@@ -1,12 +1,29 @@
 import debug from "debug";
 import Logger from "../../lib/logger";
+import twilio from "twilio";
 
 const debugLog: debug.IDebugger = debug('app:twilio-service');
 
+
+
 class TwilioService {
 
+  async sendTestMessage(recipients: string, messageBody: string){
+    const sid = process.env.TWILIO_SID;
+    const authToken = process.env.TWILIO_AUTH_TOKEN;
+    const sender = process.env.TWILIO_SENDER_NUMBER;
+    const client = twilio(sid, authToken);
+
+    const message = await client.messages.create({
+      body: messageBody,
+      from: sender,
+      to: recipients
+    });
+  }
 
   async sendMessage(recipients: string, messageBody: string){
+    const sid = process.env.TWILIO_SID
+    const authtoken = process.env.TWILIO_AUTH_TOKEN
     const recipientsArray = recipients.split(' ');
     //TODO call Twilio API here
     //TODO Log to an actual logfile
