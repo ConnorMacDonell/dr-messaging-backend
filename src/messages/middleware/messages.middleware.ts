@@ -1,5 +1,6 @@
 import express from "express";
 import messageService from "../services/messages.service";
+import Logger from "../../lib/logger";
 import debug from "debug";
 
 const log: debug.IDebugger = debug("app:messages-middleware");
@@ -28,6 +29,8 @@ class MessagesMiddleware {
     req.body.id = req.params.messageId;
     next();
   }
+
+
 }
 
 export default new MessagesMiddleware();
