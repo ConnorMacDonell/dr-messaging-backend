@@ -16,6 +16,9 @@ class TwilioService {
     let recipientsArray = recipients.split(',');
 
     for(let i = 0; i < recipientsArray.length; i++) {
+      if(recipientsArray[i][0] !== '1'){
+        recipientsArray[i] = '1' + recipientsArray[i];
+      }
       recipientsArray[i] = '+' + recipientsArray[i];
     }
 
