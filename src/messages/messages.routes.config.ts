@@ -26,6 +26,7 @@ export class MessageRoutes extends SharedRoutesConfig {
         BodyValidationMiddleware.verifyBodyFieldsErrors,
         jwtMiddleware.validJWTNeeded,
         PermissionMiddleware.permissionFlagRequired(PermissionFlag.PAID_PERMISSION),
+        MessagesMiddleware.validateCategoryUniqueness,
         MessagesController.createMessage
       );
 

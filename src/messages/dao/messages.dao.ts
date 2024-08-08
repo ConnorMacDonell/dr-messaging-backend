@@ -56,7 +56,7 @@ class MessageDao {
   }
 
   async getMessageByCategory(messageCategory: string) {
-    return this.Message.findOne({ name: messageCategory }).exec();
+    return this.Message.findOne({ category: messageCategory }).exec();
   }
 
   async updateMessageById(messageId: string, messageFields: PatchMessageDto | PutMessageDto) {
