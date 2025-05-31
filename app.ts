@@ -1,7 +1,12 @@
 import dotenv from 'dotenv';
+
+// Load .env file if it exists (for local development)
+// In production (Railway), environment variables are provided directly
 const dotenvResult = dotenv.config();
-if(dotenvResult.error) {
-  throw dotenvResult.error;
+if(dotenvResult.error && process.env.NODE_ENV !== 'production') {
+  console.warn('Warning: .env file not found. Make sure environment variables are set.');
+  // Only throw in development if you require a .env file
+  // throw dotenvResult.error;
 }
 
 import express from 'express';
@@ -21,7 +26,7 @@ import { handleStripeWebhook } from './src/webhooks/stripe.webhook';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
-const port = 3000;
+const port = process.env.PORT || 3000; // Use Railway's PORT or fallback to 3000
 const routes: Array<SharedRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug('app');
 
