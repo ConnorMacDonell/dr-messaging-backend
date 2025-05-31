@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./dist/app.js",
+    "start": "node ./dist/app.js",
+    "build": "npx tsc",
+    "dev": "npx tsc && node ./dist/app.js",
     "debug": "set DEBUG=* && npm run start",
-    "build": "chmod +x ./node_modules/.bin/tsc && npx tsc",
-    "clean": "tsc --build --clean",
+    "clean": "npx tsc --build --clean",
     "test": "mocha -r ts-node/register 'test/**/*.test.ts' --unhandled-rejections=strict",
     "test-debug": "export DEBUG=* && npm test"
   },
