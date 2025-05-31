@@ -36,7 +36,18 @@ app.post('/webhook/stripe', express.raw({type: 'application/json'}), handleStrip
 app.use(express.json());
 
 //add middleware to allow cross-origin requests
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'http://localhost:5173', // Vite dev server
+    'http://localhost:3000', // Alternative dev port
+    'https://your-app-name.vercel.app', // Replace with your actual Vercel domain
+    // Add your custom domain if you have one
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 //add helmet middleware to protect against common security vulnerabilities
 app.use(helmet());
