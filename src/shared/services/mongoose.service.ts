@@ -19,8 +19,14 @@ class MongooseService {
 
   connectWithRetry = () => {
     log('Attempting MongoDB connection (will retry if needed');
+    
+    // Use environment variable for production, fallback to local for development
+    const mongoUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017/api-db';
+    
+    console.log('Connecting to MongoDB:', mongoUrl.replace(/\/\/[^:]+:[^@]+@/, '//***:***@')); // Log URL without credentials
+    
     mongoose
-      .connect('mongodb://localhost:27017/api-db', this.mongooseOptions)
+      .connect(mongoUrl, this.mongooseOptions)
       .then(() => {
         console.log('MongoDB is connected...');
       })
