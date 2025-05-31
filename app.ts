@@ -1,13 +1,15 @@
 import dotenv from 'dotenv';
+// Load .env file if it exists, ignore if it doesn't
+dotenv.config();
 
-// Load .env file if it exists (for local development)
-// In production (Railway), environment variables are provided directly
-const dotenvResult = dotenv.config();
-if(dotenvResult.error && process.env.NODE_ENV !== 'production') {
-  console.warn('Warning: .env file not found. Make sure environment variables are set.');
-  // Only throw in development if you require a .env file
-  // throw dotenvResult.error;
-}
+// Debug: Log environment variables (remove this in production)
+console.log('Environment variables check:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT);
+console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
+console.log('STRIPE_WEBHOOK_SECRET exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
+console.log('JWT_SECRET exists:', !!process.env.JWT_SECRET);
+console.log('MONGODB_URL exists:', !!process.env.MONGODB_URL);
 
 import express from 'express';
 import * as http from 'http';
@@ -26,7 +28,11 @@ import { handleStripeWebhook } from './src/webhooks/stripe.webhook';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
-const port = process.env.PORT || 3000; // Use Railway's PORT or fallback to 3000
+
+// Railway provides PORT environment variable
+const port = process.env.PORT || 3000;
+const host = '0.0.0.0'; // Listen on all interfaces for Railway
+
 const routes: Array<SharedRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug('app');
 
@@ -51,14 +57,15 @@ routes.push(new AuthRoutes(app));
 routes.push(new MessageRoutes(app));
 
 // route to make sure everything is working properly
-const runningMessage = `Server running at http://localhost:${port}.`;
+const runningMessage = `Server running on ${host}:${port}`;
 app.get('/', (req: express.Request, res: express.Response) => {
     res.status(200).send(runningMessage);
 });
 
-export default server.listen(port, () => {
+export default server.listen(port, host, () => {
   routes.forEach((route: SharedRoutesConfig) => {
     debugLog((`Routes configured for ${route.getName()}`))
   });
   console.log(runningMessage);
+  console.log('Server is ready to accept connections');
 });
