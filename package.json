@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-    "scripts": {
+  "scripts": {
     "start": "node dist/app.js",
-    "build": "npx tsc"
+    "build": "./node_modules/.bin/tsc",
+    "build:alt": "npx --yes typescript tsc",
+    "prebuild": "npm install typescript"
   },
   "keywords": [],
   "author": "",
@@ -37,7 +39,6 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mocha": "^10.0.6",
     "@types/shortid": "^0.0.32",
-    "@types/stripe": "^8.0.417",
     "@types/supertest": "^6.0.2",
     "chai": "^5.1.0",
     "mocha": "^10.4.0",
