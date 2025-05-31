@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/app.js",
-    "build": "./node_modules/.bin/tsc",
+    "build": "echo 'Build step' && ls -la && which tsc && tsc --version",
     "build:alt": "npx --yes typescript tsc",
     "prebuild": "npm install typescript"
   },
