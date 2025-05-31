@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/app.js",
-    "build": "npx tsc",
+    "build": "npx ts",
     "dev": "npx tsc && node ./dist/app.js",
     "debug": "set DEBUG=* && npm run start",
     "clean": "npx tsc --build --clean",
