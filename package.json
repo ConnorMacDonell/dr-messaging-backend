@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
     "debug": "set DEBUG=* && npm run start",
-    "build": "tsc --build",
+    "build": "npx tsc --build",
     "clean": "tsc --build --clean",
     "test": "mocha -r ts-node/register 'test/**/*.test.ts' --unhandled-rejections=strict",
     "test-debug": "export DEBUG=* && npm test"
@@ -28,6 +28,7 @@
     "mongoose": "^8.3.3",
     "morgan": "^1.10.0",
     "shortid": "^2.2.16",
+    "stripe": "^18.2.0",
     "twilio": "^5.2.2",
     "winston": "^3.13.0"
   },
@@ -39,6 +40,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mocha": "^10.0.6",
     "@types/shortid": "^0.0.32",
+    "@types/stripe": "^8.0.417",
     "@types/supertest": "^6.0.2",
     "chai": "^5.1.0",
     "mocha": "^10.4.0",

@@ -1,59 +1,34 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const messages_dao_1 = __importDefault(require("../dao/messages.dao"));
 class MessageService {
-    list(limit, page) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.getMessages(limit, page);
-        });
+    async list(limit, page) {
+        return messages_dao_1.default.getMessages(limit, page);
     }
-    listByOwnerId(ownerId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.getMessagesByOwner(ownerId);
-        });
+    async listByOwnerId(ownerId) {
+        return messages_dao_1.default.getMessagesByOwner(ownerId);
     }
-    create(resource) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.addMessage(resource);
-        });
+    async create(resource) {
+        return messages_dao_1.default.addMessage(resource);
     }
-    readById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.getMessageById(id);
-        });
+    async readById(id) {
+        return messages_dao_1.default.getMessageById(id);
     }
-    readMessageByCategory(name) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.getMessageByCategory(name);
-        });
+    async readMessageByCategory(name) {
+        return messages_dao_1.default.getMessageByCategory(name);
     }
-    putById(id, resource) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.updateMessageById(id, resource);
-        });
+    async putById(id, resource) {
+        return messages_dao_1.default.updateMessageById(id, resource);
     }
-    patchById(id, resource) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.updateMessageById(id, resource);
-        });
+    async patchById(id, resource) {
+        return messages_dao_1.default.updateMessageById(id, resource);
     }
-    deleteById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return messages_dao_1.default.removeMessageById(id);
-        });
+    async deleteById(id) {
+        return messages_dao_1.default.removeMessageById(id);
     }
 }
 exports.default = new MessageService();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVzc2FnZXMuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9tZXNzYWdlcy9zZXJ2aWNlcy9tZXNzYWdlcy5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsdUVBQThDO0FBTTlDLE1BQU0sY0FBYztJQUNaLElBQUksQ0FBQyxLQUFhLEVBQUUsSUFBWTs7WUFDcEMsT0FBTyxzQkFBVyxDQUFDLFdBQVcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDOUMsQ0FBQztLQUFBO0lBRUssYUFBYSxDQUFDLE9BQWU7O1lBQ2pDLE9BQU8sc0JBQVcsQ0FBQyxrQkFBa0IsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNqRCxDQUFDO0tBQUE7SUFFSyxNQUFNLENBQUMsUUFBMEI7O1lBQ3JDLE9BQU8sc0JBQVcsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDMUMsQ0FBQztLQUFBO0lBRUssUUFBUSxDQUFDLEVBQVU7O1lBQ3ZCLE9BQU8sc0JBQVcsQ0FBQyxjQUFjLENBQUMsRUFBRSxDQUFDLENBQUM7UUFDeEMsQ0FBQztLQUFBO0lBRUsscUJBQXFCLENBQUMsSUFBWTs7WUFDdEMsT0FBTyxzQkFBVyxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2hELENBQUM7S0FBQTtJQUVLLE9BQU8sQ0FBQyxFQUFVLEVBQUUsUUFBdUI7O1lBQy9DLE9BQU8sc0JBQVcsQ0FBQyxpQkFBaUIsQ0FBQyxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUE7UUFDcEQsQ0FBQztLQUFBO0lBRUssU0FBUyxDQUFDLEVBQVUsRUFBRSxRQUF5Qjs7WUFDbkQsT0FBTyxzQkFBVyxDQUFDLGlCQUFpQixDQUFDLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQTtRQUNwRCxDQUFDO0tBQUE7SUFFSyxVQUFVLENBQUMsRUFBVTs7WUFDekIsT0FBTyxzQkFBVyxDQUFDLGlCQUFpQixDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQzNDLENBQUM7S0FBQTtDQUNGO0FBRUQsa0JBQWUsSUFBSSxjQUFjLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVzc2FnZXMuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9tZXNzYWdlcy9zZXJ2aWNlcy9tZXNzYWdlcy5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsdUVBQThDO0FBTTlDLE1BQU0sY0FBYztJQUNsQixLQUFLLENBQUMsSUFBSSxDQUFDLEtBQWEsRUFBRSxJQUFZO1FBQ3BDLE9BQU8sc0JBQVcsQ0FBQyxXQUFXLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQzlDLENBQUM7SUFFRCxLQUFLLENBQUMsYUFBYSxDQUFDLE9BQWU7UUFDakMsT0FBTyxzQkFBVyxDQUFDLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ2pELENBQUM7SUFFRCxLQUFLLENBQUMsTUFBTSxDQUFDLFFBQTBCO1FBQ3JDLE9BQU8sc0JBQVcsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDMUMsQ0FBQztJQUVELEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBVTtRQUN2QixPQUFPLHNCQUFXLENBQUMsY0FBYyxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQ3hDLENBQUM7SUFFRCxLQUFLLENBQUMscUJBQXFCLENBQUMsSUFBWTtRQUN0QyxPQUFPLHNCQUFXLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDaEQsQ0FBQztJQUVELEtBQUssQ0FBQyxPQUFPLENBQUMsRUFBVSxFQUFFLFFBQXVCO1FBQy9DLE9BQU8sc0JBQVcsQ0FBQyxpQkFBaUIsQ0FBQyxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUE7SUFDcEQsQ0FBQztJQUVELEtBQUssQ0FBQyxTQUFTLENBQUMsRUFBVSxFQUFFLFFBQXlCO1FBQ25ELE9BQU8sc0JBQVcsQ0FBQyxpQkFBaUIsQ0FBQyxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUE7SUFDcEQsQ0FBQztJQUVELEtBQUssQ0FBQyxVQUFVLENBQUMsRUFBVTtRQUN6QixPQUFPLHNCQUFXLENBQUMsaUJBQWlCLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDM0MsQ0FBQztDQUNGO0FBRUQsa0JBQWUsSUFBSSxjQUFjLEVBQUUsQ0FBQyJ9

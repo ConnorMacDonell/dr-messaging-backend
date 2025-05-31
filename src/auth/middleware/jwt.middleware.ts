@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { Jwt } from '../../shared/types/jwt';
 import usersService from '../../users/services/users.service';
+import Logger from '../../lib/logger';
 
 // @ts-expect-error
 const jwtSecret: string = process.env.JWT_SECRET;
@@ -43,9 +44,14 @@ class JwtMiddleware {
           return res.status(401).send();
         } else {
           res.locals.jwt = jwt.verify(authorization[1], jwtSecret) as Jwt;
+          Logger.info('=============================');
+          Logger.info(res.locals.jwt);
+          Logger.info('=============================');
           next();
         }
       } catch(err) {
+        Logger.info(err);
+        Logger.info('--------------------------------------')
         return res.status(403).send(err);
       }
     } else {
