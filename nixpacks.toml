@@ -1,0 +1,8 @@
+[phases.build]
+cmd = "npm ci && npx tsc"
+
+[phases.start]
+cmd = "node dist/app.js"
+
+[variables]
+NODE_ENV = "production"
