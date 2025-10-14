@@ -40,8 +40,8 @@ const corsOptions = {
   origin: [
     'http://localhost:5173', // Vite dev server
     'http://localhost:3000', // Alternative dev port
-    'https://your-app-name.vercel.app', // Replace with your actual Vercel domain
-    // Add your custom domain if you have one
+    'https://your-app-name.vercel.app', // Replace with actual Vercel domain
+    // Add custom domain
   ],
   credentials: true,
   optionsSuccessStatus: 200
