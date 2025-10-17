@@ -39,7 +39,7 @@ app.use(express.json());
 const corsOptions = {
   origin: [
     'http://localhost:5173', // Vite dev server
-    'http://localhost:3000', // Alternative dev port
+    'http://localhost:3001', // Alternative dev port
     'https://your-app-name.vercel.app', // Replace with actual Vercel domain
     // Add custom domain when available
   ],
