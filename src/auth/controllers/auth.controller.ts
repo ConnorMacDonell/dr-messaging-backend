@@ -18,10 +18,13 @@ class AuthController {
         .createHmac('sha512', salt)
         .update(refreshId)
         .digest('base64');
+
       req.body.refreshKey = salt.export();
+
       const token = jwt.sign(req.body, jwtSecret, {
         expiresIn:tokenExpirationInSeconds,
       });
+      
       return res.status(201).send({ accessToken: token, refreshToken: hash });
     } catch(err) {
       log('createJWT error: %O', err);
