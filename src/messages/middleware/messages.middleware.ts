@@ -10,7 +10,7 @@ class MessagesMiddleware {
     const message = await messageService.readMessageByCategory(req.body.category);
 
     if (message) {
-      res.status(400).send('A message with that category already exists.');
+      res.status(400).send('essage with that category already exists.');
     } else {
       next();
     }
