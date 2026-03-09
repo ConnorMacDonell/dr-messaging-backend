@@ -55,7 +55,7 @@ class MessagesController {
   }
 
   async sendTestMessage(req: express.Request, res: express.Response) {
-    const messageBody = "This message sent automatically, courtesy of Connor MacDonell";
+    const messageBody = "This message sent Automatically, courtesy of Connor MacDonell";
     const result = await twilioService.sendTestMessage('+14083355926', messageBody);
     res.status(204).send(result);
   }
